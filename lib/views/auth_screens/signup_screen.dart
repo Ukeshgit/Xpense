@@ -3,6 +3,7 @@ import 'package:xpense/reusuable/custom_appbar.dart';
 import 'package:xpense/reusuable/custom_button.dart';
 import 'package:xpense/reusuable/custom_textfield.dart';
 import 'package:xpense/views/auth_screens/login_screen.dart';
+import 'package:xpense/views/auth_screens/verify_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -23,7 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(context, "Sign Up"),
+      appBar: customAppBar(context, "Sign Up"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -33,8 +34,10 @@ class _SignupScreenState extends State<SignupScreen> {
             CustomTextField(
                 isVisible: true, title: "Email", controller: nameController),
             CustomTextField(
-                isVisible: false, title: "Password", controller: nameController),
-      
+                isVisible: false,
+                title: "Password",
+                controller: nameController),
+
             // check box
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +68,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Text(
                       "and Privacy Policy",
                       style: TextStyle(
-                          color: Colors.deepPurple, fontWeight: FontWeight.w500),
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.w500),
                     ))
                   ],
                 )
@@ -74,7 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(height: 20),
             // signup button
             button(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => VerifyScreen(email: "hello123@gmail.com"),)),
                 color1: const Color(0xff7f3dff),
                 text: "Sign Up",
                 color2: const Color(0xfffcfcfc)),
@@ -88,20 +92,28 @@ class _SignupScreenState extends State<SignupScreen> {
                 color1: Colors.white,
                 text: "Sign Up with Google",
                 color2: Colors.black),
-      
+
             const SizedBox(height: 19),
             // already have an account?
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account?", style: TextStyle(color: Color(0xFF91919F), fontSize: 16),),
-                TextButton(onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginScreen(),));
-                }, child:  const Text(
-                  "Login",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline, color: Color(0xFF7F3DFF)),
-                ))
+                const Text(
+                  "Already have an account?",
+                  style: TextStyle(color: Color(0xFF91919F), fontSize: 16),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ));
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color(0xFF7F3DFF)),
+                    ))
               ],
             )
           ],
